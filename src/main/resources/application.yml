@@ -6,24 +6,28 @@ spring:
 
     datasource:
         url: jdbc:h2:mem:golden_raspberry_awards
-        username: sa
-        password: password
         driverClassName: org.h2.Driver
-    
+
     h2:
-        console.enabled: true
+        console:
+            enabled: true
+            path: /h2-console
 
     jpa:
         hibernate: 
             ddl-auto: none
             show-sql: true
             format_sql: true
-        database-platform: org.hibernate.dialect.H2Dialect
 
     flyway:
+        cleanDisabled: false
         enabled: true
         locations: classpath:db/migration
         
 logging:
     level:
-        root: INFO
+        com.mg.gra: DEBUG
+    file:
+        encoding: UTF-8
+    pattern:
+        console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

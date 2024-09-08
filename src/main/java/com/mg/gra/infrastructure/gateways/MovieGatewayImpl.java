@@ -37,4 +37,9 @@ public class MovieGatewayImpl implements MovieGateway {
         return movieMapper.toDomain(savedEntity);
     }
 
+    @Override
+    public boolean existsByTitle(String title) {
+        return movieJpaRepository.existsByTitle(title);
+    }
+
 }

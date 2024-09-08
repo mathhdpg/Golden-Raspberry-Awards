@@ -1,9 +1,11 @@
 package com.mg.gra.infrastructure.gateways;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.mg.gra.domain.gateways.ProducerGateway;
 import com.mg.gra.domain.models.Producer;
+import com.mg.gra.domain.models.ProducerAward;
 import com.mg.gra.infrastructure.mapper.ProducerMapper;
 import com.mg.gra.infrastructure.model.ProducerEntity;
 import com.mg.gra.infrastructure.repository.ProducerJpaRepository;
@@ -34,6 +36,18 @@ public class ProducerGatewayImpl implements ProducerGateway {
     @Override
     public Optional<Producer> findByName(String producerName) {
         return producerJpaRepository.findByName(producerName).map(producerMapper::toDomain);
+    }
+
+    @Override
+    public List<ProducerAward> findAllWinningProducersOrderByProducerAndMovieYear() {
+        return producerJpaRepository.findAllWinningProducers()
+                .stream()
+                .map(producerAwardDTO -> {
+                    return new ProducerAward(
+                            producerAwardDTO.producerName(),
+                            producerAwardDTO.movieYear());
+                })
+                .toList();
     }
 
 }
