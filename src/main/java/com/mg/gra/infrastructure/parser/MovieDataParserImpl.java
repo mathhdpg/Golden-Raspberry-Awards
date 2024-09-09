@@ -4,8 +4,8 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.ArrayList;
 
-import com.mg.gra.application.dto.MovieData;
 import com.mg.gra.application.parser.MovieDataParser;
+import com.mg.gra.domain.entity.MovieData;
 
 import java.io.BufferedReader;
 import java.io.IOException;

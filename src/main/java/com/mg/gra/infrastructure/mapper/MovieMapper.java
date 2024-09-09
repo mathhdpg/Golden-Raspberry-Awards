@@ -2,7 +2,7 @@ package com.mg.gra.infrastructure.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.mg.gra.domain.models.Movie;
+import com.mg.gra.domain.entity.Movie;
 import com.mg.gra.infrastructure.model.MovieEntity;
 
 @Component

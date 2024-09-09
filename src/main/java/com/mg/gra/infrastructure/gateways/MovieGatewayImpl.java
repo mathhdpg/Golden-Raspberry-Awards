@@ -3,8 +3,8 @@ package com.mg.gra.infrastructure.gateways;
 import java.util.List;
 import java.util.Optional;
 
-import com.mg.gra.domain.gateways.MovieGateway;
-import com.mg.gra.domain.models.Movie;
+import com.mg.gra.application.gateways.MovieGateway;
+import com.mg.gra.domain.entity.Movie;
 import com.mg.gra.infrastructure.mapper.MovieMapper;
 import com.mg.gra.infrastructure.model.MovieEntity;
 import com.mg.gra.infrastructure.repository.MovieJpaRepository;

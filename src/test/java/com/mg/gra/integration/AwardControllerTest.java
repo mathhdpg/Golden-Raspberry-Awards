@@ -1,6 +1,11 @@
 package com.mg.gra.integration;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +20,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.mg.gra.GraApplication;
-import com.mg.gra.application.dto.AwardIntervalDTO;
-import com.mg.gra.application.dto.AwardIntervalResultDTO;
 import com.mg.gra.application.service.AwardService;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import com.mg.gra.domain.entity.AwardInterval;
+import com.mg.gra.domain.entity.AwardIntervalResult;
 
 @ActiveProfiles("test")
 @SpringBootTest(classes = GraApplication.class)
@@ -40,7 +38,7 @@ public class AwardControllerTest {
     @Test
     public void shouldReturnStatusOkAndCallService() throws Exception {
         when(awardService.withAwardIntervals())
-                .thenReturn(new AwardIntervalResultDTO(new ArrayList<>(), new ArrayList<>()));
+                .thenReturn(new AwardIntervalResult(new ArrayList<>(), new ArrayList<>()));
 
         mockMvc.perform(get("/v1/award/min-max-intervals")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -51,11 +49,11 @@ public class AwardControllerTest {
 
     @Test
     public void shouldReturnStatusOkWithConsistentMappedDTO() throws Exception {
-        List<AwardIntervalDTO> mins = List.of(new AwardIntervalDTO("Producer1", 1, 2000, 2001));
-        List<AwardIntervalDTO> maxs = List.of(new AwardIntervalDTO("Producer2", 99, 1900, 1999));
-        AwardIntervalResultDTO resultDTO = new AwardIntervalResultDTO(mins, maxs);
+        List<AwardInterval> mins = List.of(new AwardInterval("Producer1", 1, 2000, 2001));
+        List<AwardInterval> maxs = List.of(new AwardInterval("Producer2", 99, 1900, 1999));
+        AwardIntervalResult result = new AwardIntervalResult(mins, maxs);
 
-        when(awardService.withAwardIntervals()).thenReturn(resultDTO);
+        when(awardService.withAwardIntervals()).thenReturn(result);
         mockMvc.perform(get("/v1/award/min-max-intervals")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

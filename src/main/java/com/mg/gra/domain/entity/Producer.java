@@ -1,4 +1,4 @@
-package com.mg.gra.domain.models;
+package com.mg.gra.domain.entity;
 
 public class Producer {
 

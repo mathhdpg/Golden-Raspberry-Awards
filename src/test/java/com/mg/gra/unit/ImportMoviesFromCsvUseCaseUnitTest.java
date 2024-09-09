@@ -6,10 +6,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,13 +17,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.mg.gra.GraApplication;
-import com.mg.gra.application.dto.MovieData;
+import com.mg.gra.application.gateways.MovieGateway;
+import com.mg.gra.application.gateways.ProducerGateway;
 import com.mg.gra.application.parser.MovieDataParser;
 import com.mg.gra.application.useCase.ImportMoviesFromCSVUseCase;
-import com.mg.gra.domain.gateways.MovieGateway;
-import com.mg.gra.domain.gateways.ProducerGateway;
-import com.mg.gra.domain.models.Movie;
-import com.mg.gra.domain.models.Producer;
+import com.mg.gra.domain.entity.Movie;
+import com.mg.gra.domain.entity.MovieData;
+import com.mg.gra.domain.entity.Producer;
 
 @ActiveProfiles("test")
 @SpringBootTest(classes = GraApplication.class)

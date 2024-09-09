@@ -1,10 +1,10 @@
-package com.mg.gra.domain.gateways;
+package com.mg.gra.application.gateways;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.mg.gra.domain.models.Producer;
-import com.mg.gra.domain.models.ProducerAward;
+import com.mg.gra.domain.entity.Producer;
+import com.mg.gra.domain.entity.ProducerAward;
 
 public interface ProducerGateway {
 

@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import com.mg.gra.application.gateways.MovieGateway;
+import com.mg.gra.application.gateways.ProducerGateway;
 import com.mg.gra.application.parser.MovieDataParser;
-import com.mg.gra.domain.gateways.MovieGateway;
-import com.mg.gra.domain.gateways.ProducerGateway;
-import com.mg.gra.domain.models.Movie;
-import com.mg.gra.domain.models.Producer;
+import com.mg.gra.domain.entity.Movie;
+import com.mg.gra.domain.entity.Producer;
 
 public class ImportMoviesFromCSVUseCase {
 

@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.mg.gra.application.dto.MovieData;
 import com.mg.gra.application.parser.MovieDataParser;
+import com.mg.gra.domain.entity.MovieData;
 import com.mg.gra.infrastructure.parser.MovieDataParserImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

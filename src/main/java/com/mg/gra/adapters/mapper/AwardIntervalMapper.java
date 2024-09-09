@@ -1,11 +1,11 @@
-package com.mg.gra.application.mapper;
+package com.mg.gra.adapters.mapper;
 
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.mg.gra.application.dto.AwardIntervalDTO;
-import com.mg.gra.domain.models.AwardInterval;
+import com.mg.gra.adapters.dto.AwardIntervalDTO;
+import com.mg.gra.domain.entity.AwardInterval;
 
 @Component
 public class AwardIntervalMapper {

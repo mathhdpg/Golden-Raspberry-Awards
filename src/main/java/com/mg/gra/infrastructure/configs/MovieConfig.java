@@ -3,10 +3,10 @@ package com.mg.gra.infrastructure.configs;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.mg.gra.application.gateways.MovieGateway;
+import com.mg.gra.application.gateways.ProducerGateway;
 import com.mg.gra.application.parser.MovieDataParser;
 import com.mg.gra.application.useCase.ImportMoviesFromCSVUseCase;
-import com.mg.gra.domain.gateways.MovieGateway;
-import com.mg.gra.domain.gateways.ProducerGateway;
 import com.mg.gra.infrastructure.gateways.MovieGatewayImpl;
 import com.mg.gra.infrastructure.mapper.MovieMapper;
 import com.mg.gra.infrastructure.parser.MovieDataParserImpl;

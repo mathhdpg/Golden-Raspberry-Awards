@@ -1,9 +1,9 @@
-package com.mg.gra.application.mapper;
+package com.mg.gra.adapters.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.mg.gra.application.dto.AwardIntervalResultDTO;
-import com.mg.gra.domain.models.AwardIntervalResult;
+import com.mg.gra.adapters.dto.AwardIntervalResultDTO;
+import com.mg.gra.domain.entity.AwardIntervalResult;
 
 @Component
 public class AwardIntervalResultMapper {

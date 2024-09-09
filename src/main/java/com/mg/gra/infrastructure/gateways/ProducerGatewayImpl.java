@@ -3,9 +3,9 @@ package com.mg.gra.infrastructure.gateways;
 import java.util.List;
 import java.util.Optional;
 
-import com.mg.gra.domain.gateways.ProducerGateway;
-import com.mg.gra.domain.models.Producer;
-import com.mg.gra.domain.models.ProducerAward;
+import com.mg.gra.application.gateways.ProducerGateway;
+import com.mg.gra.domain.entity.Producer;
+import com.mg.gra.domain.entity.ProducerAward;
 import com.mg.gra.infrastructure.mapper.ProducerMapper;
 import com.mg.gra.infrastructure.model.ProducerEntity;
 import com.mg.gra.infrastructure.repository.ProducerJpaRepository;

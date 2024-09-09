@@ -21,9 +21,9 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mg.gra.GraApplication;
+import com.mg.gra.application.gateways.MovieGateway;
 import com.mg.gra.application.useCase.ImportMoviesFromCSVUseCase;
-import com.mg.gra.domain.gateways.MovieGateway;
-import com.mg.gra.domain.models.Movie;
+import com.mg.gra.domain.entity.Movie;
 
 @ActiveProfiles("test")
 @SpringBootTest(classes = GraApplication.class)

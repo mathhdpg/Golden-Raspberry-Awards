@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.mg.gra.domain.models.Producer;
+import com.mg.gra.domain.entity.Producer;
 import com.mg.gra.infrastructure.model.ProducerEntity;
 
 @Component

@@ -1,5 +1,12 @@
 package com.mg.gra.unit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -7,18 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.mg.gra.GraApplication;
+import com.mg.gra.application.gateways.ProducerGateway;
 import com.mg.gra.application.useCase.FindProducerWithMinMaxAwardIntervalsUseCase;
-import com.mg.gra.domain.gateways.ProducerGateway;
-import com.mg.gra.domain.models.AwardInterval;
-import com.mg.gra.domain.models.AwardIntervalResult;
-import com.mg.gra.domain.models.ProducerAward;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
+import com.mg.gra.domain.entity.AwardInterval;
+import com.mg.gra.domain.entity.AwardIntervalResult;
+import com.mg.gra.domain.entity.ProducerAward;
 
 @ActiveProfiles("test")
 @SpringBootTest(classes = GraApplication.class)

@@ -1,4 +1,4 @@
-package com.mg.gra.application.dto;
+package com.mg.gra.adapters.dto;
 
 import java.util.List;
 

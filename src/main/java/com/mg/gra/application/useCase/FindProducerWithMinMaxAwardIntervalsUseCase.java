@@ -3,10 +3,10 @@ package com.mg.gra.application.useCase;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mg.gra.domain.gateways.ProducerGateway;
-import com.mg.gra.domain.models.AwardInterval;
-import com.mg.gra.domain.models.AwardIntervalResult;
-import com.mg.gra.domain.models.ProducerAward;
+import com.mg.gra.application.gateways.ProducerGateway;
+import com.mg.gra.domain.entity.AwardInterval;
+import com.mg.gra.domain.entity.AwardIntervalResult;
+import com.mg.gra.domain.entity.ProducerAward;
 
 public class FindProducerWithMinMaxAwardIntervalsUseCase {
 
