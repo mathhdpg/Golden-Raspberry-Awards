@@ -20,7 +20,7 @@ public class MovieDataParserImpl implements MovieDataParser {
         final List<MovieData> movies = new ArrayList<>();
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             final String header = reader.readLine();
-            if (header == null || header.isEmpty()) {
+            if (header == null || header.isBlank()) {
                 return movies;
             }
 

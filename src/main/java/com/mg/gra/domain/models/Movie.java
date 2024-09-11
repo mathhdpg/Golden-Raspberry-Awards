@@ -21,10 +21,16 @@ public class Movie {
     }
 
     public Movie(Long id, String title, int year, String studios, boolean winner, List<Producer> producers) {
+        if (title == null || title.isBlank())
+            throw new IllegalArgumentException("Movie title cannot be null or empty");
+
+        if (studios == null || studios.isBlank())
+            studios = "N/A";
+
         this.id = id;
-        this.title = title;
+        this.title = title.trim();
         this.year = year;
-        this.studios = studios;
+        this.studios = studios.trim();
         this.winner = winner;
         this.producers = producers;
     }

@@ -53,11 +53,11 @@ public class ImportMoviesFromCsvTest {
         assertEquals(2, movies.size(), "Expected 2 movies to be saved in the database");
 
         Movie firstMovie = movies.get(0);
-        verifyMovie(firstMovie, 1980, "Can't Stop the Music", true);
+        verifyMovie(firstMovie, 1980, "Can't Stop the Music", "Associated Film Distribution", true);
         verifyProducerByMovieId(firstMovie, "Allan Carr");
 
         Movie secondMovie = movies.get(1);
-        verifyMovie(secondMovie, 1980, "Cruising", false);
+        verifyMovie(secondMovie, 1980, "Cruising", "Lorimar Productions, United Artists", false);
         assertEquals(2, secondMovie.getProducers().size(), "Expected 2 producers for the movie 'Cruising'");
         verifyProducerByMovieId(secondMovie, "Jerry Weintraub", "Allan Carr");
     }
@@ -176,9 +176,68 @@ public class ImportMoviesFromCsvTest {
                 "Expected 2 movie after importing movies with same name and different studio and year");
     }
 
-    private void verifyMovie(Movie movie, int expectedYear, String expectedTitle, boolean expectedWinnerStatus) {
+    @Test
+    @Order(8)
+    @Transactional
+    @Sql(scripts = { "/sql/common/clean_database.sql" })
+    public void shouldSaveMoviesWithoutStudioWithDefaultNA() throws Exception {
+        String csvContentWithDuplicates = "year;title;studios;producers;winner\n" +
+                "1900;Movie 1;;Producer 1;yes\n";
+        InputStream csvInputStream = new ByteArrayInputStream(csvContentWithDuplicates.getBytes());
+
+        importMoviesFromCSVUseCase.importMoviesFromCSV(csvInputStream);
+        List<Movie> movies = movieGateway.findAll();
+
+        assertEquals(1, movies.size(),
+                "Expected 1 movie after importing movies without studio");
+
+        verifyMovie(movies.get(0), 1900, "Movie 1", "N/A", true);
+    }
+
+    @Test
+    @Order(9)
+    @Transactional
+    @Sql(scripts = { "/sql/common/clean_database.sql" })
+    public void shouldThrowExceptionWhenImportMoviesWithoutName() throws Exception {
+        String csvContentWithDuplicates = "year;title;studios;producers;winner\n" +
+                "1900;;Studio 1;Producer 1;yes\n";
+        InputStream csvInputStream = new ByteArrayInputStream(csvContentWithDuplicates.getBytes());
+        assertThrows(IllegalArgumentException.class,
+                () -> importMoviesFromCSVUseCase.importMoviesFromCSV(csvInputStream),
+                "Expected exception when saving movies without name");
+    }
+
+    @Test
+    @Order(10)
+    @Transactional
+    @Sql(scripts = { "/sql/common/clean_database.sql" })
+    public void shouldThrowExceptionWhenImportMoviesWithoutYear() throws Exception {
+        String csvContentWithDuplicates = "year;title;studios;producers;winner\n" +
+                ";Movie 1;Studio 1;Producer 1;yes\n";
+        InputStream csvInputStream = new ByteArrayInputStream(csvContentWithDuplicates.getBytes());
+        assertThrows(IllegalArgumentException.class,
+                () -> importMoviesFromCSVUseCase.importMoviesFromCSV(csvInputStream),
+                "Expected exception when saving movies without year");
+    }
+
+    @Test
+    @Order(11)
+    @Transactional
+    @Sql(scripts = { "/sql/common/clean_database.sql" })
+    public void shouldThrowExceptionWhenImportMoviesWithoutProducers() throws Exception {
+        String csvContentWithDuplicates = "year;title;studios;producers;winner\n" +
+                "1900;Movie 1;Studio 1;;yes\n";
+        InputStream csvInputStream = new ByteArrayInputStream(csvContentWithDuplicates.getBytes());
+        assertThrows(IllegalArgumentException.class,
+                () -> importMoviesFromCSVUseCase.importMoviesFromCSV(csvInputStream),
+                "Expected exception when saving movies without producers");
+    }
+
+    private void verifyMovie(Movie movie, int expectedYear, String expectedTitle, String expectedStudios,
+            boolean expectedWinnerStatus) {
         assertEquals(expectedYear, movie.getYear(), "Movie year is incorrect");
         assertEquals(expectedTitle, movie.getTitle(), "Movie title is incorrect");
+        assertEquals(expectedStudios, movie.getStudios(), "Movie studios is incorrect");
         assertEquals(expectedWinnerStatus, movie.isWinner(), "Winner status is incorrect");
     }
 
