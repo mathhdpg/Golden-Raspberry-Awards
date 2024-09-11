@@ -6,6 +6,6 @@ import com.mg.gra.infrastructure.model.MovieEntity;
 
 public interface MovieJpaRepository extends JpaRepository<MovieEntity, Integer> {
 
-    boolean existsByTitle(String title);
+    boolean existsByTitleAndYearAndStudios(String title, int year, String studios);
 
 }

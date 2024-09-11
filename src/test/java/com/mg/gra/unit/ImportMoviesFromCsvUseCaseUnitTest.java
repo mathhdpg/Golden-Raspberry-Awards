@@ -52,8 +52,8 @@ public class ImportMoviesFromCsvUseCaseUnitTest {
     @Test
     public void shouldImportMoviesFromCsv() throws Exception {
         List<MovieData> movieDataList = List.of(
-                new MovieData(1980, "Can't Stop the Music", new String[] { "Allan Carr" }, true),
-                new MovieData(1980, "Cruising", new String[] { "Jerry Weintraub" }, false));
+                new MovieData(1980, "Can't Stop the Music", "Studio 1", new String[] { "Allan Carr" }, true),
+                new MovieData(1980, "Cruising", "Studio 1", new String[] { "Jerry Weintraub" }, false));
 
         when(movieDataParser.parse(any(InputStream.class))).thenReturn(movieDataList);
 
@@ -66,8 +66,8 @@ public class ImportMoviesFromCsvUseCaseUnitTest {
     @Test
     public void shouldImportMoviesFromCsvWithMultipleProducersPerMovie() throws Exception {
         List<MovieData> movieDataList = List.of(
-                new MovieData(1983, "Hercules", new String[] { "Yoram Globus", "Menahem Golan" }, false),
-                new MovieData(1986, "Under the Cherry Moon",
+                new MovieData(1983, "Hercules", "Studio 1", new String[] { "Yoram Globus", "Menahem Golan" }, false),
+                new MovieData(1986, "Under the Cherry Moon", "Studio 1",
                         new String[] { "Bob Cavallo", "Joe Ruffalo", "Steve Fargnoli" }, true));
 
         when(movieDataParser.parse(any(InputStream.class))).thenReturn(movieDataList);
@@ -81,8 +81,9 @@ public class ImportMoviesFromCsvUseCaseUnitTest {
     @Test
     public void shouldImportMoviesFromCsvWithSameProducerInMultipleMovies() throws Exception {
         List<MovieData> movieDataList = List.of(
-                new MovieData(1983, "Hercules", new String[] { "Bob Cavallo", "Yoram Globus", "Menahem Golan" }, false),
-                new MovieData(1986, "Under the Cherry Moon",
+                new MovieData(1983, "Hercules", "Studio 1",
+                        new String[] { "Bob Cavallo", "Yoram Globus", "Menahem Golan" }, false),
+                new MovieData(1986, "Under the Cherry Moon", "Studio 1",
                         new String[] { "Bob Cavallo", "Joe Ruffalo", "Steve Fargnoli" }, true));
 
         when(movieDataParser.parse(any(InputStream.class))).thenReturn(movieDataList);

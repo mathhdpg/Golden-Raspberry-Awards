@@ -19,6 +19,9 @@ public class MovieEntity {
     @Column(name = "movie_year", nullable = false)
     private int year;
 
+    @Column(name = "studios", nullable = false)
+    private String studios;
+
     @Column(nullable = false)
     private boolean winner;
 
@@ -48,6 +51,14 @@ public class MovieEntity {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getStudios() {
+        return studios;
+    }
+
+    public void setStudios(String studios) {
+        this.studios = studios;
     }
 
     public boolean isWinner() {

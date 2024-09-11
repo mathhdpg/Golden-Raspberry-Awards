@@ -30,12 +30,16 @@ public class ImportMoviesFromCSVUseCase {
 
     public void importMoviesFromCSV(InputStream csvInputStream) {
         movieDataParser.parse(csvInputStream).forEach(movieData -> {
-            if (movieGateway.existsByTitle(movieData.title())) {
+            if (movieGateway.existsByTitleAndYearAndStudios(
+                    movieData.title(),
+                    movieData.year(),
+                    movieData.studios())) {
                 return;
             }
 
             List<Producer> producers = getProducersFromNames(movieData.producersNames());
-            Movie movie = new Movie(movieData.title(), movieData.year(), movieData.winner(), producers);
+            Movie movie = new Movie(movieData.title(), movieData.year(), movieData.studios(), movieData.winner(),
+                    producers);
             movieGateway.save(movie);
         });
     }

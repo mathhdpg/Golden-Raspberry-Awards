@@ -80,10 +80,10 @@ public class ImportMoviesFromCsvTest {
     @Order(3)
     @Transactional
     @Sql(scripts = { "/sql/common/clean_database.sql" })
-    public void shouldNotDuplicateMoviesOnImport() throws Exception {
+    public void shouldNotDuplicateMoviesWithSameNameAndYearAndStudioOnImport() throws Exception {
         String csvContentWithDuplicates = "year;title;studios;producers;winner\n" +
-                "1980;Can't Stop the Music;Associated Film Distribution;Allan Carr;yes\n" +
-                "1980;Can't Stop the Music;Associated Film Distribution;Allan Carr;yes\n";
+                "1900;Movie 1;Studio 1;Producer 1;yes\n" +
+                "1900;Movie 1;Studio 1;Producer 1;yes\n";
         InputStream csvInputStream = new ByteArrayInputStream(csvContentWithDuplicates.getBytes());
 
         importMoviesFromCSVUseCase.importMoviesFromCSV(csvInputStream);
@@ -125,6 +125,55 @@ public class ImportMoviesFromCsvTest {
         Movie movie = movies.get(0);
         assertEquals(3, movie.getProducers().size(), "Expected 3 producers for the movie");
         verifyProducerByMovieId(movie, "Producer 1", "Producer 2", "Producer 3");
+    }
+
+    @Test
+    @Order(6)
+    @Transactional
+    @Sql(scripts = { "/sql/common/clean_database.sql" })
+    public void shouldSaveMoviesWithSameNameAndStudioWithDifferentYear() throws Exception {
+        String csvContentWithDuplicates = "year;title;studios;producers;winner\n" +
+                "1900;Movie 1;Studio 1;Producer 1;yes\n" +
+                "1901;Movie 1;Studio 1;Producer 1;yes\n";
+        InputStream csvInputStream = new ByteArrayInputStream(csvContentWithDuplicates.getBytes());
+
+        importMoviesFromCSVUseCase.importMoviesFromCSV(csvInputStream);
+        List<Movie> movies = movieGateway.findAll();
+
+        assertEquals(2, movies.size(), "Expected 2 movie after importing movies with same name and different year");
+    }
+
+    @Test
+    @Order(7)
+    @Transactional
+    @Sql(scripts = { "/sql/common/clean_database.sql" })
+    public void shouldSaveMoviesWithSameNameAndYearWithDifferentStudio() throws Exception {
+        String csvContentWithDuplicates = "year;title;studios;producers;winner\n" +
+                "1900;Movie 1;Studio 1;Producer 1;yes\n" +
+                "1900;Movie 1;Studio 2;Producer 1;yes\n";
+        InputStream csvInputStream = new ByteArrayInputStream(csvContentWithDuplicates.getBytes());
+
+        importMoviesFromCSVUseCase.importMoviesFromCSV(csvInputStream);
+        List<Movie> movies = movieGateway.findAll();
+
+        assertEquals(2, movies.size(), "Expected 2 movie after importing movies with same name and different studio");
+    }
+
+    @Test
+    @Order(8)
+    @Transactional
+    @Sql(scripts = { "/sql/common/clean_database.sql" })
+    public void shouldSaveMoviesWithSameNameAndDifferentStudioAndYear() throws Exception {
+        String csvContentWithDuplicates = "year;title;studios;producers;winner\n" +
+                "1900;Movie 1;Studio 1;Producer 1;yes\n" +
+                "1901;Movie 1;Studio 2;Producer 1;yes\n";
+        InputStream csvInputStream = new ByteArrayInputStream(csvContentWithDuplicates.getBytes());
+
+        importMoviesFromCSVUseCase.importMoviesFromCSV(csvInputStream);
+        List<Movie> movies = movieGateway.findAll();
+
+        assertEquals(2, movies.size(),
+                "Expected 2 movie after importing movies with same name and different studio and year");
     }
 
     private void verifyMovie(Movie movie, int expectedYear, String expectedTitle, boolean expectedWinnerStatus) {
