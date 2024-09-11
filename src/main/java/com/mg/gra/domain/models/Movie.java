@@ -25,7 +25,7 @@ public class Movie {
             throw new IllegalArgumentException("Movie title cannot be null or empty");
 
         if (studios == null || studios.isBlank())
-            studios = "N/A";
+            throw new IllegalArgumentException("Movie studios cannot be null or empty");
 
         this.id = id;
         this.title = title.trim();

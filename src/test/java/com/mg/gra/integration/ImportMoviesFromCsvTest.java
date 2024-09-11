@@ -180,18 +180,14 @@ public class ImportMoviesFromCsvTest {
     @Order(8)
     @Transactional
     @Sql(scripts = { "/sql/common/clean_database.sql" })
-    public void shouldSaveMoviesWithoutStudioWithDefaultNA() throws Exception {
+    public void shouldThrowExceptionWhenImportMoviesWithoutStudio() throws Exception {
         String csvContentWithDuplicates = "year;title;studios;producers;winner\n" +
                 "1900;Movie 1;;Producer 1;yes\n";
         InputStream csvInputStream = new ByteArrayInputStream(csvContentWithDuplicates.getBytes());
 
-        importMoviesFromCSVUseCase.importMoviesFromCSV(csvInputStream);
-        List<Movie> movies = movieGateway.findAll();
-
-        assertEquals(1, movies.size(),
-                "Expected 1 movie after importing movies without studio");
-
-        verifyMovie(movies.get(0), 1900, "Movie 1", "N/A", true);
+        assertThrows(IllegalArgumentException.class,
+                () -> importMoviesFromCSVUseCase.importMoviesFromCSV(csvInputStream),
+                "Expected exception when saving movies without studios");
     }
 
     @Test
