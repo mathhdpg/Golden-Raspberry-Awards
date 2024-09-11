@@ -1,0 +1,1 @@
+alter table gra_movie add column studios varchar(255) not null default 'N/A';

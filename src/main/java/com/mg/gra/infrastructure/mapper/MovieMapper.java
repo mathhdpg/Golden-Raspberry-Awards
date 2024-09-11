@@ -19,6 +19,7 @@ public class MovieMapper {
                 entity.getId(),
                 entity.getTitle(),
                 entity.getYear(),
+                entity.getStudios(),
                 entity.isWinner(),
                 producerMapper.toDomainList(entity.getProducers()));
     }
@@ -28,6 +29,7 @@ public class MovieMapper {
         entity.setId(movie.getId());
         entity.setTitle(movie.getTitle());
         entity.setYear(movie.getYear());
+        entity.setStudios(movie.getStudios());
         entity.setProducers(producerMapper.toEntityList(movie.getProducers()));
         entity.setWinner(movie.isWinner());
         return entity;

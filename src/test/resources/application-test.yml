@@ -1,20 +1,22 @@
 spring:
+    application:
+        name: golden_raspberry_awards_test
+
     datasource:
         url: jdbc:h2:mem:golden_raspberry_awards_test
-        username: golden_raspberry_awards_test
-        password: password
-        driver-class-name: org.h2.Driver
+        driverClassName: org.h2.Driver
 
     h2:
         console:
             enabled: true
+            path: /h2-console
 
     jpa:
-        hibernate:
-            ddl-auto: create-drop
+        hibernate: 
+            ddl-auto: none
             show-sql: true
             format_sql: true
         database-platform: org.hibernate.dialect.H2Dialect
 
     flyway:
-        enabled: false
+        enabled: true

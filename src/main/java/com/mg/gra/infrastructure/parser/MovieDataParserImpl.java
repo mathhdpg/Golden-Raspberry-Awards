@@ -20,7 +20,7 @@ public class MovieDataParserImpl implements MovieDataParser {
         final List<MovieData> movies = new ArrayList<>();
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             final String header = reader.readLine();
-            if (header == null || header.isEmpty()) {
+            if (header == null || header.isBlank()) {
                 return movies;
             }
 
@@ -34,12 +34,13 @@ public class MovieDataParserImpl implements MovieDataParser {
 
                 final int year = Integer.parseInt(columns[0]);
                 final String title = columns[1];
+                final String studios = columns[2];
                 final String producersString = columns[3];
                 final boolean isWinner = columns.length >= 5 && "yes".equalsIgnoreCase(columns[4]);
 
                 String[] producersNames = producersString.split("(,\\s*|\\s+and\\s+)");
 
-                movies.add(new MovieData(year, title, producersNames, isWinner));
+                movies.add(new MovieData(year, title, studios, producersNames, isWinner));
             }
 
             return movies;

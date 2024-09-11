@@ -13,6 +13,6 @@ public interface MovieGateway {
 
     Movie save(Movie any);
 
-    boolean existsByTitle(String title);
+    boolean existsByTitleAndYearAndStudios(String title, int year, String studios);
 
 }

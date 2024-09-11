@@ -11,8 +11,11 @@ public class Producer {
     }
 
     public Producer(Long id, String name) {
+        if (name == null || name.isBlank())
+            throw new IllegalArgumentException("Producer name cannot be null or empty");
+
         this.id = id;
-        this.name = name;
+        this.name = name.trim();
     }
 
     public Long getId() {

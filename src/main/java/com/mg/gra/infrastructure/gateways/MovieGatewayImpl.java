@@ -38,8 +38,8 @@ public class MovieGatewayImpl implements MovieGateway {
     }
 
     @Override
-    public boolean existsByTitle(String title) {
-        return movieJpaRepository.existsByTitle(title);
+    public boolean existsByTitleAndYearAndStudios(String title, int year, String studios) {
+        return movieJpaRepository.existsByTitleAndYearAndStudios(title, year, studios);
     }
 
 }
